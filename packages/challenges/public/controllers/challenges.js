@@ -109,11 +109,27 @@ angular.module('mean.challenges').controller('ChallengesController', ['$scope', 
       }
     };
 
+    $scope.gridOptions = {};
     $scope.find = function() {
       Challenges.query(function(challenges) {
         $scope.challenges = challenges;
+
+        $scope.challengesGrid = [];
+        challenges.forEach(function(challenge) {
+          $scope.challengesGrid.push({Edit: '', Title: challenge.title, Creator: 'creator', Created: challenge.createdAt});
+        });
+
       });
+
+      $scope.challengeColumnDefs = [
+            {displayName: 'Edit', cellTemplate: '<a class="btn" href="/#!/challenges/{{row.entity.id}}/edit"><span class="glyphicon glyphicon-edit"></span></a>'},
+            {field: 'title', displayName: 'Title', cellTemplate: '<a class="btn" href="/#!/challenges/{{row.entity.id}}">{{row.entity.title}}</a>'},
+            {field: 'creator', displayName: 'Creator'},
+            {field: 'createdAt', displayName: 'Created', cellTemplate: '<span>{{row.entity.createdAt| date: \'yyyy/MM/dd HH:mm a\'}}</span>'}
+          ];
+
     };
+
 
     $scope.findOne = function() {
       Challenges.get({

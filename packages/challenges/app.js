@@ -9,6 +9,7 @@
 var Module = require('meanio').Module;
 
 var Challenges = new Module('challenges');
+Challenges.angularDependencies(['ngGrid']);
 
 /*
  * All MEAN packages require registration

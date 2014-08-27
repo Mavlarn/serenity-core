@@ -1,4 +1,7 @@
 <section data-ng-controller="ChallengesController" data-ng-init="find()">
+
+  <div style="height:450px;" class="grid" ng-grid="{data: 'challenges', columnDefs: 'challengeColumnDefs'}"></div>
+
   <ul class="challenges list-unstyled">
     <li data-ng-repeat="challenge in challenges">
 
